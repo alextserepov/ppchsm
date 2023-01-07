@@ -10,17 +10,25 @@ stdenv.mkDerivation rec {
     sha256 = "42qP3d8OQR31pWjxZWCuQ4q27JWvtIutzO4xcf0IeUg=";
   };
 
-  buildInputs = [
-    pkgs.cmake
+  cmakeFlags = [
+    "-DACTA_LIBRARY_CONF=/etc/cryptoauthlib/cryptoauthlib.conf"
+    "-DACTA_PLATFORM_FREE=freez"
+    "-DACTA_PLATFORM_MALLOC=malloc"
+    "-DATCA_OPENSSL=ON"
+    "-DATCA_PKCS11=ON"
+    "-DATCA_TFLEX_SUPPORT=ON"
+    "-DATCA_TNGLORA_SUPPORT=ON"
+    "-DATCA_TNGTLS_SUPPORT=ON"
+    "-DATCA_TNG_LEGACY_SUPPORT=ON"
+    "-DATCA_USE_ATCAB_FUNCTIONS=ON"
+    "-DATCA_HAL_KIT_HID=ON"
   ];
 
-  PREFIX = placeholder "out";
+  nativeBuildInputs = [ cmake ];
 
-  configurePhase = ''
-    mkdir build
-    cd build
-    cmake -DATCA_PKCS11:STRING=ON -DATCA_HAL_I2C=ON ..
-  '';
+  buildInputs = [
+    pkgs.openssl
+  ];
 
   installPhase = ''
     make DESTDIR=$out install
