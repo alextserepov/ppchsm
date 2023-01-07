@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DACTA_LIBRARY_CONF=/etc/cryptoauthlib/cryptoauthlib.conf"
-    "-DACTA_PLATFORM_FREE=freez"
+    "-DACTA_PLATFORM_FREE=free"
     "-DACTA_PLATFORM_MALLOC=malloc"
     "-DATCA_OPENSSL=ON"
     "-DATCA_PKCS11=ON"
